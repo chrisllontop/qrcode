@@ -27,7 +27,9 @@ const PenaltyScores = {
  * @return {Boolean}         true if valid, false otherwise
  */
 export function isValid(mask) {
-  return mask != null && mask !== "" && !isNaN(mask) && mask >= 0 && mask <= 7;
+  return (
+    mask != null && mask !== "" && !Number.isNaN(mask) && mask >= 0 && mask <= 7
+  );
 }
 
 /**

@@ -1,4 +1,4 @@
-import { L, M, Q, H } from "./error-correction-level";
+import { H, L, M, Q } from "./error-correction-level";
 
 const EC_BLOCKS_TABLE = [
   // L  M  Q  H

@@ -1,9 +1,9 @@
 import canPromise from "./can-promise";
 import * as QRCode from "./core/qrcode";
 import * as PngRenderer from "./renderer/png";
-import * as Utf8Renderer from "./renderer/utf8";
-import * as TerminalRenderer from "./renderer/terminal";
 import * as SvgRenderer from "./renderer/svg";
+import * as TerminalRenderer from "./renderer/terminal";
+import * as Utf8Renderer from "./renderer/utf8";
 
 function checkParams(text, opts, cb) {
   if (typeof text === "undefined") {
@@ -18,10 +18,9 @@ function checkParams(text, opts, cb) {
   if (typeof cb !== "function") {
     if (!canPromise()) {
       throw new Error("Callback required as last argument");
-    } else {
-      opts = cb || {};
-      cb = null;
     }
+    opts = cb || {};
+    cb = null;
   }
 
   return {
@@ -42,9 +41,6 @@ function getRendererFromType(type) {
     case "txt":
     case "utf8":
       return Utf8Renderer;
-
-    case "png":
-    case "image/png":
     default:
       return PngRenderer;
   }
@@ -57,8 +53,6 @@ function getStringRendererFromType(type) {
 
     case "terminal":
       return TerminalRenderer;
-
-    case "utf8":
     default:
       return Utf8Renderer;
   }

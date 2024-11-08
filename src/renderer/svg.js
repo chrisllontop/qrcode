@@ -1,5 +1,5 @@
+import fs from "node:fs";
 import * as svgTagRenderer from "./svg-tag";
-import fs from "fs";
 
 export const render = svgTagRenderer.render;
 

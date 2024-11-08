@@ -1,27 +1,27 @@
-import {
-  getSymbolTotalCodewords,
-  getSymbolSize,
-  setToSJISFunction,
-} from "./utils";
-import { M, from } from "./error-correction-level";
+import { getPositions } from "./alignment-pattern";
 import { BitBuffer } from "./bit-buffer";
 import { BitMatrix } from "./bit-matrix";
-import { getPositions } from "./alignment-pattern";
-import { getPositions as _getPositions } from "./finder-pattern";
-import { getBestMask, applyMask, from as _from } from "./mask-pattern";
 import {
-  getTotalCodewordsCount,
   getBlocksCount,
+  getTotalCodewordsCount,
 } from "./error-correction-code";
-import { ReedSolomonEncoder } from "./reed-solomon-encoder";
-import {
-  getEncodedBits,
-  getBestVersionForData,
-  from as __from,
-} from "./version";
+import { M, from } from "./error-correction-level";
+import { getPositions as _getPositions } from "./finder-pattern";
 import { getEncodedBits as _getEncodedBits } from "./format-info";
+import { from as _from, applyMask, getBestMask } from "./mask-pattern";
 import { getCharCountIndicator } from "./mode";
-import { fromArray, rawSplit, fromString } from "./segments";
+import { ReedSolomonEncoder } from "./reed-solomon-encoder";
+import { fromArray, fromString, rawSplit } from "./segments";
+import {
+  getSymbolSize,
+  getSymbolTotalCodewords,
+  setToSJISFunction,
+} from "./utils";
+import {
+  from as __from,
+  getBestVersionForData,
+  getEncodedBits,
+} from "./version";
 
 /**
  * Add finder patterns bits to matrix
@@ -116,7 +116,9 @@ function setupAlignmentPattern(matrix, version) {
 function setupVersionInfo(matrix, version) {
   const size = matrix.size;
   const bits = getEncodedBits(version);
-  let row, col, mod;
+  let row;
+  let col;
+  let mod;
 
   for (let i = 0; i < 18; i++) {
     row = Math.floor(i / 3);
@@ -138,7 +140,8 @@ function setupVersionInfo(matrix, version) {
 function setupFormatInfo(matrix, errorCorrectionLevel, maskPattern) {
   const size = matrix.size;
   const bits = _getEncodedBits(errorCorrectionLevel, maskPattern);
-  let i, mod;
+  let i;
+  let mod;
 
   for (i = 0; i < 15; i++) {
     mod = ((bits >> i) & 1) === 1;
@@ -344,7 +347,8 @@ function createCodewords(bitBuffer, version, errorCorrectionLevel) {
   // Interleave the data and error correction codewords from each block
   const data = new Uint8Array(totalCodewords);
   let index = 0;
-  let i, r;
+  let i;
+  let r;
 
   // Add data codewords
   for (i = 0; i < maxDataSize; i++) {
@@ -445,7 +449,7 @@ Minimum version required to store current data is: ${bestVersion}.
   // Add data codewords
   setupData(modules, dataBits);
 
-  if (isNaN(maskPattern)) {
+  if (Number.isNaN(maskPattern)) {
     // Find best mask pattern
     maskPattern = getBestMask(
       modules,

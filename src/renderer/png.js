@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { PNG } from "pngjs";
 import * as Utils from "./utils";
 

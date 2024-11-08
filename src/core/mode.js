@@ -1,5 +1,5 @@
+import { testAlphanumeric, testKanji, testNumeric } from "./regex";
 import { isValid as _isValid } from "./version-check";
-import { testNumeric, testAlphanumeric, testKanji } from "./regex";
 
 export const NUMERIC = {
   id: "Numeric",
@@ -45,7 +45,7 @@ export function getCharCountIndicator(mode, version) {
   }
 
   if (version >= 1 && version < 10) return mode.ccBits[0];
-  else if (version < 27) return mode.ccBits[1];
+  if (version < 27) return mode.ccBits[1];
   return mode.ccBits[2];
 }
 
@@ -57,9 +57,9 @@ export function getCharCountIndicator(mode, version) {
  */
 export function getBestModeForData(dataStr) {
   if (testNumeric(dataStr)) return NUMERIC;
-  else if (testAlphanumeric(dataStr)) return ALPHANUMERIC;
-  else if (testKanji(dataStr)) return KANJI;
-  else return BYTE;
+  if (testAlphanumeric(dataStr)) return ALPHANUMERIC;
+  if (testKanji(dataStr)) return KANJI;
+  return BYTE;
 }
 
 /**

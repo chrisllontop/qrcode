@@ -15,7 +15,9 @@ class NumericData {
   }
 
   write(bitBuffer) {
-    let i, group, value;
+    let i;
+    let group;
+    let value;
 
     // The input data string is divided into groups of three digits,
     // and each group is converted to its 10-bit binary equivalent.

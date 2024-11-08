@@ -1,26 +1,26 @@
-import {
-  NUMERIC,
-  ALPHANUMERIC,
-  BYTE,
-  KANJI,
-  getCharCountIndicator,
-  getBestModeForData,
-  from,
-  toString,
-} from "./mode";
-import NumericData from "./numeric-data";
+import { find_path } from "dijkstrajs";
 import { AlphanumericData } from "./alphanumeric-data";
 import { ByteData } from "./byte-data";
 import { KanjiData } from "./kanji-data";
 import {
-  NUMERIC as _NUMERIC,
+  ALPHANUMERIC,
+  BYTE,
+  KANJI,
+  NUMERIC,
+  from,
+  getBestModeForData,
+  getCharCountIndicator,
+  toString,
+} from "./mode";
+import NumericData from "./numeric-data";
+import {
+  BYTE_KANJI,
   ALPHANUMERIC as _ALPHANUMERIC,
   BYTE as _BYTE,
   KANJI as _KANJI,
-  BYTE_KANJI,
+  NUMERIC as _NUMERIC,
 } from "./regex";
 import { isKanjiModeEnabled } from "./utils";
-import { find_path } from "dijkstrajs";
 
 /**
  * Returns UTF8 byte length

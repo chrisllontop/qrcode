@@ -1,14 +1,14 @@
-import { getBCHDigit, getSymbolTotalCodewords } from "./utils";
 import { getTotalCodewordsCount } from "./error-correction-code";
-import { from as _from, M } from "./error-correction-level";
+import { M, from as _from } from "./error-correction-level";
 import {
-  getCharCountIndicator,
-  MIXED,
-  BYTE,
-  NUMERIC,
   ALPHANUMERIC,
+  BYTE,
   KANJI,
+  MIXED,
+  NUMERIC,
+  getCharCountIndicator,
 } from "./mode";
+import { getBCHDigit, getSymbolTotalCodewords } from "./utils";
 import { isValid } from "./version-check";
 
 // Generator polynomial used to encode version information
@@ -120,8 +120,6 @@ export function getCapacity(version, errorCorrectionLevel, mode) {
 
     case KANJI:
       return Math.floor(usableBits / 13);
-
-    case BYTE:
     default:
       return Math.floor(usableBits / 8);
   }
